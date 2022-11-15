@@ -1,0 +1,63 @@
+main()
+{
+(A)    int x = doSomething(1,2,3);
+		// -- pushing on the stack to call 'doSomething'
+        // push(A)
+        // push(1)
+        // push(2)
+        // push(3)
+        // jump (B)
+        // ... (this is where B is executing)
+        // ... (returning here)
+
+        // the only things is the result of doSomething (6)
+        // x = pop() -- 6
+        // ... and now the stack is empty
+
+}
+
+int doSomething(int x1, int x2, int x3)
+{
+    // pseudo assembly language
+    // = stack: A, 1, 2, 3
+    // x3 = pop() -- 3  
+    // = stack: A, 1, 2  
+    // x2 = pop() -- 2
+    // = stack: A, 1
+    // x1 = pop() -- 1
+    // = stack: A
+    // int temp = x1+x2+x3 -- 6
+    // int ret = pop() -- (A)
+    // = stack:
+    // push(temp)
+    // = stack: 6
+    // jump ret -- this brings us back to (A) in main
+(B)    return x1+x2+x3;
+}
+// live stack
+STACK:
+
+(A)
+push(A) -- the return address, or where we "Currently" address
+push(1)
+push(2)
+push(3)
+jump (B)
+x3 = pop() -- 3
+x2 = pop() -- 2
+x1 = pop() -- 1
+temp = x1+x2+x3 -- 6
+ret = pop() -- A
+// right now the stack is empty
+push(temp)
+jump ret
+
+
+
+ = stack: A
+// int temp = x1+x2+x3 -- 6
+// push(temp)
+// = stack: A, 6
+// int ret = pop() -- (6)
+// = stack: A
+// jump ret -- jumping to 6...where is 6 in memory
