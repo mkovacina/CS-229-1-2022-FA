@@ -1,0 +1,26 @@
+// depth first traversal of a graph
+// psuedo-code but Java-esque
+
+var stack = new Stack();
+var visited = new HashTable();
+var graph = GetUndirectedGraphFromSomewhere();
+
+// source is an arbitrary first node
+stack.Push(graph.Source);
+visited.Add(graph.Source.Value);
+
+// what type is Source?
+// is it an "object" of type 'Node'?
+
+while(stack is not empty)
+{
+	var node = stack.Pop();
+
+	print node.Value
+
+	foreach(var neighbor in node.Neighbors())
+	{
+		if (visited.Contains(neighbor.Value) == false 
+			stack.Push(neighbor);
+	}
+}
